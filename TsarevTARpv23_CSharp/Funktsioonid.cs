@@ -102,5 +102,47 @@ namespace TsarevTARpv23_CSharp
             }
             return arvud;
         }
+        /*--------------------------------4------------------------------*/
+        public static void OstaElevant()
+        {
+            string kasutajaSisend;
+
+            do
+            {
+                Console.WriteLine("Osta elevant ära!");
+
+                kasutajaSisend = Console.ReadLine();
+            }
+            while (!string.Equals(kasutajaSisend, "elevant", StringComparison.OrdinalIgnoreCase));
+
+            Console.WriteLine("Kasutaja sisestas Elevant. Programm lõpetab.");
+        }
+        /*------------------------------5-------------------------------------*/
+        public static void NimedJaVanused()
+        {
+            string[] nimed = new string[5];
+            int[] vanused = new int[5];
+            int summaarneVanus = 0;
+
+            for (int i = 0; i < nimed.Length; i++)
+            {
+                Console.Write($"Sisesta {i + 1}. nimi: ");
+                nimed[i] = Console.ReadLine();
+                Console.Write($"Sisesta {nimed[i]} vanus: ");
+                vanused[i] = int.Parse(Console.ReadLine());
+                summaarneVanus += vanused[i];
+            }
+
+            double keskmineVanus = (double)summaarneVanus / vanused.Length;
+            int vanimVanus = vanused.Max();
+            int noorimVanus = vanused.Min();
+            string vanimInimene = nimed[Array.IndexOf(vanused, vanimVanus)];
+            string noorimInimene = nimed[Array.IndexOf(vanused, noorimVanus)];
+
+            Console.WriteLine($"Summaarne vanus: {summaarneVanus}");
+            Console.WriteLine($"Aritmeetiline keskmine: {keskmineVanus}");
+            Console.WriteLine($"Vanim inimene on {vanimInimene}, vanus: {vanimVanus}");
+            Console.WriteLine($"Noorim inimene on {noorimInimene}, vanus: {noorimVanus}");
+        }
     }
 }
