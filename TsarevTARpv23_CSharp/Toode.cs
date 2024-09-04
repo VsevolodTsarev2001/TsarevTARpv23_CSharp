@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+//Listid ja sõnastikud. Meetodid ja näidised - esimine osa ülesanne 3
 namespace TsarevTARpv23_CSharp
 {
     internal class Toode

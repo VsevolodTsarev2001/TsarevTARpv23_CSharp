@@ -13,8 +13,9 @@ namespace TsarevTARpv23_CSharp
         public static void Main(string[] args)
         {
             Random random = new Random();
-            //ülessane 3
-            //Ülessane 2
+            //Listid ja sõnastikud. Meetodid ja näidised - ülessane 4
+
+            //Listid ja sõnastikud. Meetodid ja näidised - Ülessane 2
             List<int> numbers = new List<int>();
             for (int i = 0; i < 20; i++)
             {
@@ -33,7 +34,7 @@ namespace TsarevTARpv23_CSharp
             Console.WriteLine("Sorteeritud numbers: ");
             sortNumbers.ForEach(n => Console.WriteLine(n + " "));
             //III.osa OOP
-
+            //----------Listid ja sõnastikud. Meetodid ja näidised finish ülesanne 3-------------//
 
             List<Inimene> inimesed = new List<Inimene>();
             Inimene inimene1 = new Inimene();
@@ -51,12 +52,115 @@ namespace TsarevTARpv23_CSharp
             inimesed.Add(inimene1);
             inimesed.Add(inimene2);
             inimesed.Add(inimene3);
-            inimesed.Add(new Inimene("Irina", 18,Sugu.naine));
+            inimesed.Add(new Inimene("Irina", 18, Sugu.naine));
             foreach (Inimene inimene in inimesed)
             {
-                Console.WriteLine(inimene.Nimi + " on" + inimene.Vanus + "aasta vana"+".Ta on "+ inimene.Sugu+" SBI="+ inimene.HB_vorrand());
+                Console.WriteLine(inimene.Nimi + " on" + inimene.Vanus + "aasta vana"+".Ta on "+ inimene.Sugu+" SBI="+ inimene.HB_vorrand(inimene.Eluviis));
+            }
+            
+           /* List<Toode> tooded = new List<Toode>
+            {
+                new Toode("Pirn", 72),
+                new Toode("Tictak", 115),
+                new Toode("Kana", 150),
+                new Toode("TukTuk", 210),
+                new Toode("Leib", 265)
+            };
+
+
+            Console.WriteLine("Sisesta aktiivsustase (1-5):\n" +
+                "1: Istuv eluviis\n" +
+                "2: Vähene aktiivsus\n" +
+                "3: Mõõdukas aktiivsus\n" +
+                "4: Kõrge aktiivsus\n" +
+                "5: Väga kõrge aktiivsus");
+
+            int aktiivsus = int.Parse(Console.ReadLine());
+
+
+            Inimene user = inimene1;
+
+            double aktiivsusTegur = 1.2;
+            switch (aktiivsus)
+            {
+                case 1: aktiivsusTegur = 1.2; break;
+                case 2: aktiivsusTegur = 1.375; break;
+                case 3: aktiivsusTegur = 1.55; break;
+                case 4: aktiivsusTegur = 1.725; break;
+                case 5: aktiivsusTegur = 1.9; break;
+                default: Console.WriteLine("Vale sisestus!"); return;
             }
 
+
+            double kaloriVajadus = user.HB_vorrand(inimene1.Eluviis) * aktiivsusTegur;
+            Console.WriteLine($"Päevane kaloriarv on: {kaloriVajadus} kcal");
+
+            foreach (Toode toode in tooded)
+            {
+                double kogus = kaloriVajadus / toode.Kaloried;
+                Console.WriteLine($"Sa võid süüa {kogus:F2} grammi {toode.ToodeNimetus}");
+            }*/
+            //------variant.2 ülesanne 3
+            List<Toode> tooded = new List<Toode>
+            {
+                new Toode("Õun", 52),
+                new Toode("Banaan", 89),
+                new Toode("Kanafilee", 165),
+                new Toode("Kartul", 77),
+                new Toode("Leib", 265)
+            };
+
+            // Get user input for their details
+            Console.WriteLine("Sisesta oma nimi:");
+            string nimi = Console.ReadLine();
+
+            Console.WriteLine("Sisesta oma vanus:");
+            int vanus = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Sisesta oma sugu (mees/naine):");
+            Sugu sugu = (Sugu)Enum.Parse(typeof(Sugu), Console.ReadLine().ToLower());
+
+            Console.WriteLine("Sisesta oma pikkus (cm):");
+            int pikkus = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Sisesta oma kaal (kg):");
+            double kaal = double.Parse(Console.ReadLine());
+
+            // Get user input for activity level
+            Console.WriteLine("Sisesta aktiivsustase (1-5):\n" +
+                "1: Istuv eluviis\n" +
+                "2: Vähene aktiivsus\n" +
+                "3: Mõõdukas aktiivsus\n" +
+                "4: Kõrge aktiivsus\n" +
+                "5: Väga kõrge aktiivsus");
+
+            int aktiivsus = int.Parse(Console.ReadLine());
+
+            Eluviis eluviis = Eluviis.Istuv;
+            switch (aktiivsus)
+            {
+                case 1: eluviis = Eluviis.Istuv; break;
+                case 2: eluviis = Eluviis.Vähene; break;
+                case 3: eluviis = Eluviis.Mõõdukas; break;
+                case 4: eluviis = Eluviis.Kõrge; break;
+                case 5: eluviis = Eluviis.Väga_kõrge; break;
+                default: Console.WriteLine("Vale sisestus!"); return;
+            }
+
+            // Create an instance of Inimene with the provided data
+            Inimene user = new Inimene(nimi, vanus, sugu, eluviis) { Pikkus = pikkus, Kaal = kaal };
+
+            // Calculate daily caloric need
+            double kaloriVajadus = user.HB_vorrand(user.Eluviis);
+            Console.WriteLine($"Päevane kaloriarv on: {kaloriVajadus} kcal");
+
+            // Display the amount of each food item the user can consume
+            foreach (Toode toode in tooded)
+            {
+                double kogus = kaloriVajadus / toode.Kaloried;
+                Console.WriteLine($"Sa võid süüa {kogus:F2} grammi {toode.ToodeNimetus}");
+            }
+            //----------------------------------------------------------------------------------//
             Auto auto1 = new Auto("681MRP", Color.NavajoWhite, inimene1);
             Auto auto2 = new Auto("765JKS", Color.Red, inimene1);
             Auto auto3 = new Auto("245THK", Color.Bisque, inimene1);
@@ -88,9 +192,7 @@ namespace TsarevTARpv23_CSharp
                 {
                     Console.WriteLine("Kokku oli " + arrayList.Count + " elemente, vaid otsitav puudub");
                 }
-                arrayList.Clear();
-                arrayList.Insert(1, "Anna");
-                arrayList.Insert(0, "Inna");
+
 
 
 
@@ -170,24 +272,24 @@ namespace TsarevTARpv23_CSharp
                 if (eesnimi.ToUpper() == "JUKU")
                 {
                     Console.WriteLine("Lähme kinno!\nKui vana sa oled?");
-                    int vanus = int.Parse(Console.ReadLine());
-                    if (vanus < 0 || vanus > 100)
+                    int vanus1 = int.Parse(Console.ReadLine());
+                    if (vanus1 < 0 || vanus1 > 100)
                     {
                         Console.WriteLine("Viga!");
                     }
-                    else if (vanus <= 6)
+                    else if (vanus1 <= 6)
                     {
                         Console.WriteLine("Tasuta pilet!");
                     }
-                    else if (vanus <= 15)
+                    else if (vanus1 <= 15)
                     {
                         Console.WriteLine("Lastepilet!");
                     }
-                    else if (vanus <= 65)
+                    else if (vanus1 <= 65)
                     {
                         Console.WriteLine("Täispilet!");
                     }
-                    else if (vanus <= 100)
+                    else if (vanus1 <= 100)
                     {
                         Console.WriteLine("Sooduspilet!");
                     }
@@ -195,9 +297,9 @@ namespace TsarevTARpv23_CSharp
                     try
                     {
                         Console.WriteLine("Mis on sinu pikkus?");
-                        double pikkus = Double.Parse(Console.ReadLine());
-                        string vastus = Funktsioonid.Pikkuse_analuus(pikkus);
-                        Console.WriteLine("Sinu pikkus on {0}, sa oled {1}", pikkus, vastus);
+                        double pikkus1 = Double.Parse(Console.ReadLine());
+                        string vastus = Funktsioonid.Pikkuse_analuus(pikkus1);
+                        Console.WriteLine("Sinu pikkus on {0}, sa oled {1}", pikkus1, vastus);
                     }
                     catch (Exception e)
                     {

@@ -8,7 +8,7 @@ namespace TsarevTARpv23_CSharp
 {
     public class Funktsioonid
     {
-        //Ülesanne 1
+        //Listid ja sõnastikud. Meetodid ja näidised - Ülesanne 1
         public static void Ull()
         {
             Console.OutputEncoding = Encoding.UTF8;
